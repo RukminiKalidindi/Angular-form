@@ -1,0 +1,90 @@
+<div class="container">
+  <div *ngIf="!submitted">
+    <h1>Project Management System</h1>
+    <!-- <form #heroForm="ngForm" (ngSubmit)="onSubmit(heroForm.value)"> -->
+      <div class="form-group">
+        <label for="project">Select Project</label>
+        <select class="form-control" name="project" ngModel #project="ngModel" required>
+          <option *ngFor="let p of projects" [value]="p">{{ p }}</option>
+        </select>
+        <div class="alert alert-danger" [hidden]="project.valid || project.pristine">project is required</div>
+      </div>
+      <div class="form-group">
+        <label for="projectName">Project Name</label>
+        <input type="text" class="form-control" name="projectName" ngModel #projectName="ngModel" required>
+        <div class="alert alert-danger" [hidden]="projectName.valid || projectName.pristine">Project name is required</div>
+      </div>
+      <div class="form-group">
+        <label for="projectDescription">Project Description</label>
+        <textarea name="message" class="form-control" name="projectDescription" rows="10" cols="30" ngModel #projectDescription="ngModel" required></textarea>
+        <div class="alert alert-danger" [hidden]="projectDescription.valid || projectDescription.pristine">Project Description is required</div>
+      </div>
+      <div class="form-group">
+        <label for="projectManagerName">Project Manager Name</label>
+        <input type="text" class="form-control" name="projectManagerName" ngModel #projectManagerName="ngModel" required>
+        <div class="alert alert-danger" [hidden]="projectManagerName.valid || projectManagerName.pristine">Project manager name is required</div>
+      </div>
+      <div class="buttons">
+        <button name="addTeamMembers" type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Add Team Members</button>
+        <button name="addRequirements" style="float:right;" class="btn btn-default" onclick="myFunction2()">Add Requirements</button>
+        <!-- <button mat-button class="btn btn-default" (click)="myFunction($event)">Basic</button> -->
+        <p id="saved"></p>
+    </div>
+      <button type="submit" class="btn btn-default" [disabled]="!heroForm.valid" (click)="onSubmit(heroForm.value)">Submit</button>
+
+    <!-- </form> -->
+  </div>
+  <div *ngIf="submitted">
+    <h2>You submitted the following:</h2>
+    <div class="row">
+      <div class="col-md-2">Project Name</div>
+      <div class="col-md-10 pull-left">{{ form.projectName }}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">Project Manager Name</div>
+      <div class="col-md-10 pull-left">{{ form.projectManagerName }}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">Power</div>
+      <div class="col-md-10 pull-left">{{ form.power }}</div>
+    </div>
+    <br />
+    Raw output from form.value:
+    <br />
+    {{ form | json }}
+    <br /><br />
+    <button class="btn btn-default" (click)="submitted=false">Edit</button>
+  </div>
+
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+
+
+  <!-- <div *ngIf="teamMemberModal"> -->
+   
+  <!-- </div> -->
+
+</div>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+
